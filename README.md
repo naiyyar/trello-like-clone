@@ -1,24 +1,40 @@
-# README
+# **Trello Clone** 📝🚀
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A **Trello-like task management application** built with **Ruby on Rails 8**, **Hotwire**, and **StimulusJS**.
 
-Things you may want to cover:
+## **📌 Features**
 
-* Ruby version
+✅ **Task Boards** – Create, edit, and manage multiple boards.  
+✅ **Drag & Drop Cards** – Move tasks between lists seamlessly.  
+✅ **Real-time Updates** – Powered by **Hotwire** for a smooth UX.  
+✅ **User Authentication** – Secure login & signup.  
+✅ **Collaboration** – Invite team members to work on boards.  
+✅ **Fast & Lightweight** – Optimized performance using Rails 8.
 
-* System dependencies
+## **🛠️ Tech Stack**
 
-* Configuration
+-   **Backend**: Ruby on Rails 8
+-   **Frontend**: Hotwire (Turbo + StimulusJS), Tailwind CSS
+-   **Database**: PostgreSQL
 
-* Database creation
+## **🚀 Installation & Setup**
 
-* Database initialization
+### **1️⃣ Clone the Repository**
 
-* How to run the test suite
+`git clone https://github.com/yourusername/trello_clone.git`
+`cd trello_clone` 
 
-* Services (job queues, cache servers, search engines, etc.)
+### **2️⃣ Install Dependencies**
 
-* Deployment instructions
+`bundle install`
+`yarn install # If using Tailwind via webpack` 
 
-* ...
+### **3️⃣ Setup Database**
+
+`rails db:create db:migrate db:seed` 
+
+### **4️⃣ Start the Server**
+
+`rails server` 
+
+Visit **http://localhost:3000/** in your browser. 🎉
