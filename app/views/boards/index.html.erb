@@ -1,16 +1,43 @@
-<p style="color: green"><%= notice %></p>
+<% if @boards.exists? %>
+  <div class="flex">
+    <div class="bg-gray-200 border-r-2 border-gray-300 top-0 left-0 bottom-0 fixed py-2 w-60">
+      <div class="flex border-b-1 border-gray-400 py-2">
+        <div class="px-3 w-15 rounded-sm"><%= image_tag "https://ui-avatars.com/api/?name=#{current_user.name}" %></div>
+        <div class="my-1"><%= current_user.name %> </div>
+      </div>
 
-<% content_for :title, "Boards" %>
+      <ul class="my-10">
+        <% @boards.each do |board| %>
+          <%= link_to '#' do %>
+            <li class="py-1 px-3 my-2 hover:bg-gray-300">
+              <%= board.name %>  
+            </li>
+          <%end%>
+        <%end%>
+      </ul>
+    </div>
+    
+    <%# all lists %>
+    <div class="top-0 left-60 bottom-0 fixed p-5">
+      <div class="flex">
+        <% @current_board.lists.each do |list| %>
+          <div class="border border-gray-300 py-1 p-2 rounded rounded-xl m-2 shadow-md shadow-gray-150 min-w-80 bg-gray-50">
+            <b class="text-gray-600"><%= list.name %></b>
+            
+            <ul class="py-5">
+              <% list.tasks.each do |task| %>
+                <li class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-gray-400">
+                  <%= task.title %>    
+                </li>
+              <%end%>
+            </ul>
+          </div>
 
-<h1>Boards</h1>
-
-<div id="boards">
-  <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", board %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New board", new_board_path %>
+          <div>
+            <%#= render 'tasks/form', task: Task.new %>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+<%end%>
