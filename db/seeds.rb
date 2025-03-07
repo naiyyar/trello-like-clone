@@ -1,4 +1,4 @@
-user = User.find_or_create_by(email: 'test@gmail.com')
+user = User.create(email: 'test@gmail.com', password: '123456')
 board = Board.create(name: 'Board 1', user_id: user.id)
 
 board.lists.create([{name: 'List 1'}, {name: 'List 2'}, {name: 'List 3'}])
