@@ -3,5 +3,5 @@ class Task < ApplicationRecord
   validates :title, presence: true
 
   include RankedModel
-  ranks :row_order
+  ranks :row_order, with_same: [:list_id]
 end

@@ -23,9 +23,10 @@ export default class extends Controller {
   }
 
   updateSorting(ev){
-    // target = ev.item
-    console.log(this)
-    // put(this.urlValue, JSON.strigify({row_order_positions: event.index}))
+    const sortableUrl = ev.item.dataset.sortableUrl
+    put(sortableUrl, {
+      body: JSON.stringify({row_order_position: ev.newIndex})
+    })
   }
 
   handleCursor(type){

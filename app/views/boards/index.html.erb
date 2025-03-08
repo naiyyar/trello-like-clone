@@ -28,7 +28,7 @@
               <% list.tasks.order(:row_order).each do |task| %>
                 <p 
                   class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-blue-400 cursor-pointer"
-                  data-sortable-url-value="<%= sort_list_task_url(list, task) %>"
+                  data-sortable-url="<%= sort_list_task_url(list, task) %>"
                   >
                   <%= task.title %>    
                 </p>

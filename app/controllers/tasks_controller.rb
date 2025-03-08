@@ -11,7 +11,10 @@ class TasksController < ApplicationController
   end
 
   def sort
-    debugger
+    task = Task.find(params[:id])
+    task.update(row_order_position: params[:row_order_position])
+
+    head :no_content
   end
 
   # GET /tasks/new

@@ -10,6 +10,13 @@ class ListsController < ApplicationController
   def show
   end
 
+  def sort
+    list = List.find(params[:id])
+    list.update(row_order_position: params[:row_order_position])
+
+    head :no_content
+  end
+
   # GET /lists/new
   def new
     @list = List.new
