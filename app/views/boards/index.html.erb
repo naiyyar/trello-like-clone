@@ -19,18 +19,18 @@
     
     <%# all lists %>
     <div class="top-0 left-60 bottom-0 fixed p-5">
-      <div class="flex" data-controller="sortable">
+      <div class="flex" data-controller="sortable" data-sortable-group-value="lists">
         <% @current_board.lists.each do |list| %>
-          <div class="border border-gray-300 py-1 p-2 rounded rounded-xl m-2 shadow-md shadow-gray-150 min-w-80 bg-gray-50">
+          <div class="border border-gray-300 py-1 p-2 rounded rounded-xl m-1 shadow-md shadow-gray-150 min-w-80 bg-gray-50 drop">
             <b class="text-gray-600"><%= list.name %></b>
             
-            <ul class="py-5" data-controller="sortable">
+            <div class="py-5" data-controller="sortable" data-sortable-group-value="tasks">
               <% list.tasks.each do |task| %>
-                <li class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-gray-400" >
+                <p class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-gray-400 cursor-pointer" >
                   <%= task.title %>    
-                </li>
+                </p>
               <%end%>
-            </ul>
+            </div>
           </div>
 
           <div>
