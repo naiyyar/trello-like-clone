@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_07_115110) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_08_041006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_115110) do
     t.string "background"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "row_order"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
@@ -28,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_115110) do
     t.bigint "board_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "row_order"
     t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
@@ -36,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_115110) do
     t.bigint "list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "row_order"
     t.index ["list_id"], name: "index_tasks_on_list_id"
   end
 
