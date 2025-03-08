@@ -14,10 +14,18 @@ export default class extends Controller {
   }
 
   onEnd(ev){
-    console.log(ev)
+    this.updateSorting(ev)
   }
 
   onStart(){
-    this.element.style.cursor = 'grab'
+    this.handleCursor('grab')
+  }
+
+  updateSorting(ev){
+    // put request
+  }
+
+  handleCursor(type){
+    this.element.style.cursor = type
   }
 }

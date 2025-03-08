@@ -3,8 +3,9 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = Board.order(created_at: :asc)
+    @boards = Board.includes(:lists).order(:row_order)
     @current_board = @boards.first
+    @lists = @current_board.lists.includes(:tasks).order(:row_order)
   end
 
   # GET /boards/1 or /boards/1.json
