@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 import Sortable from 'sortablejs'
+import { put } from '@rails/request.js'
 
 // Connects to data-controller="sortable"
 export default class extends Controller {
-  static values = { group: String } 
+  static values = { group: String, url: String }
   
   connect() {
     new Sortable(this.element, {
@@ -22,7 +23,9 @@ export default class extends Controller {
   }
 
   updateSorting(ev){
-    // put request
+    // target = ev.item
+    console.log(this)
+    // put(this.urlValue, JSON.strigify({row_order_positions: event.index}))
   }
 
   handleCursor(type){
