@@ -4,5 +4,5 @@ class List < ApplicationRecord
   validates :name, presence: true
 
   include RankedModel
-  ranks :row_order
+  ranks :row_order, with_same: [:board_id]
 end
