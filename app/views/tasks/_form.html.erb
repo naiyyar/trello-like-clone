@@ -1,6 +1,13 @@
-<%= form_with(model: task, url: [list, task]) do |form| %>
-  <%= form.text_field :title, class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-blue-400 cursor-pointer', placeholder: '+ Add a task' %>
-  <%# <div class="form-actions"> %>
-    <%= form.submit 'Add', class: 'rounded-full bg-sky-500 px-5 py-2 text-sm leading-5 font-semibold text-white hover:bg-sky-700 cursor-pointer' %>
-  <%# </div> %>
+<%= form_with(model: task, url: [list, task], html: {id: "#{dom_id(task)}_#{list.id}", data: { controller: 'form-actions' } }) do |form| %>
+  <%= form.text_field :title, 
+                      class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-blue-400 cursor-pointer max-w-60',
+                      placeholder: '+ Add a task',
+                      autocomplete: false,
+                      data: { action: 'focus->form-actions#showActionButtons'}
+  %>
+  
+  <div class="form-actions hidden" data-form-actions-target="actions">
+    <%= form.submit 'Add', class: 'rounded-full bg-sky-500 px-3 py-2 text-sm leading-5 font-semibold text-white hover:bg-sky-700 cursor-pointer' %>
+    <%= link_to 'Cancel', 'javascript:void(0)', class: 'rounded-full bg-gray-500 px-3 py-2 text-sm leading-5 font-semibold text-white hover:bg-gray-700 cursor-pointer', data: {action: 'click->form-actions#cancel'} %>
+  </div>
 <% end %>

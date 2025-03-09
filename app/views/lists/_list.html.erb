@@ -1,12 +1,10 @@
-<div id="<%= dom_id list %>">
-  <p>
-    <strong>Name:</strong>
-    <%= list.name %>
-  </p>
-
-  <p>
-    <strong>Board:</strong>
-    <%= list.board_id %>
-  </p>
-
+<div class="border border-gray-300 py-1 p-2 rounded rounded-xl m-1 shadow-md shadow-gray-150 min-w-60 bg-gray-100 cursor-pointer" data-sortable-url="<%=sort_list_path(list)%>" id="lists">
+  <b class="text-gray-600"><%= list.name %></b>
+  
+  <div id="tasks_<%=list.id%>" class="py-4" data-controller="sortable" data-sortable-group-value="tasks">
+    <% list.tasks.rank(:row_order).each do |task| %>
+      <%= render 'tasks/task', task: task, list: list %>
+    <%end%>
+  </div>
+  <%= turbo_frame_tag "new_task_#{list.id}", src: new_list_task_path(list) %>
 </div>

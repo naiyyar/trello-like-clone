@@ -1,27 +1,8 @@
 <%= form_with(model: list) do |form| %>
-  <% if list.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
+  <%= form.text_field :name, class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-blue-400 cursor-pointer', placeholder: '+ Add a list' %>
 
-      <ul>
-        <% list.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :board_id, style: "display: block" %>
-    <%= form.text_field :board_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-actions" data-controller="form-actions">
+    <%= form.submit 'Add', class: 'rounded-full bg-sky-500 px-3 py-2 text-sm leading-5 font-semibold text-white hover:bg-sky-700 cursor-pointer' %>
+    <%= link_to 'Cancel', 'javascript:void(0)', class: 'rounded-full bg-gray-500 px-3 py-2 text-sm leading-5 font-semibold text-white hover:bg-gray-700 cursor-pointer', data: {action: 'click->form-actions#cancel'} %>
   </div>
 <% end %>
