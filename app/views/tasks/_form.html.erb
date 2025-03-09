@@ -1,4 +1,6 @@
 <%= form_with(model: task, url: [list, task]) do |form| %>
-  <%= form.text_field :title %>
-  <%= form.hidden_field :list_id, value: list.id %>
+  <%= form.text_field :title, class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-blue-400 cursor-pointer', placeholder: '+ Add a task' %>
+  <%# <div class="form-actions"> %>
+    <%= form.submit 'Add', class: 'rounded-full bg-sky-500 px-5 py-2 text-sm leading-5 font-semibold text-white hover:bg-sky-700 cursor-pointer' %>
+  <%# </div> %>
 <% end %>

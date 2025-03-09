@@ -1,12 +1,6 @@
-<div id="<%= dom_id task %>">
-  <p>
-    <strong>Title:</strong>
-    <%= task.title %>
-  </p>
-
-  <p>
-    <strong>List:</strong>
-    <%= task.list_id %>
-  </p>
-
-</div>
+<p 
+  class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-blue-400 cursor-pointer"
+  data-sortable-url="<%= sort_list_task_url(list, task) %>"
+  >
+  <%= task.title %>    
+</p>
