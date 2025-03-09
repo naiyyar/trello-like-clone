@@ -1,6 +1,6 @@
 <%= form_with(model: task, url: [list, task], html: {id: "#{dom_id(task)}_#{list.id}", data: { controller: 'form-actions' } }) do |form| %>
   <%= form.text_field :title, 
-                      class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-blue-400 cursor-pointer max-w-60',
+                      class: 'rounded rounded-xl p-2 my-2 bg-gray-200 focus:border-sky-400 cursor-pointer max-w-60 hover:bg-gray-300',
                       placeholder: '+ Add a task',
                       autocomplete: false,
                       data: { action: 'focus->form-actions#showActionButtons'}
