@@ -1,8 +1,9 @@
 <div 
+  id=<%= "#{dom_id(task)}_container" %> 
   class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-blue-400 cursor-pointer relative"
   data-sortable-url="<%= sort_list_task_url(list, task) %>" data-controller="task">
   <%= turbo_frame_tag "edit_task_#{task.id}" do %>
-    <%= task.title %>
+    <div class="w-[215px]"><%= task.title %></div>
     <div class="absolute right-4 top-1">
       <%= link_to 'Edit', edit_task_path(task), class: 'text-gray-300 hover:text-gray-700 text-sm', data: { action: 'click->task#setFocus' } %>
     </div>

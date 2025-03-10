@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@task)}_container" do %>
+  <%= render "tasks/task", task: @task, list: @task.list %>
+<% end %>
