@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "lists_#{current_board.id}" do %>
+  <div class="top-0 left-60 bottom-0 fixed p-5 right-0 overflow-x-auto">
+    <div class="flex" data-controller="sortable" data-sortable-group-value="lists">
+      <%= render @lists %>
+      <%= turbo_frame_tag "new_list", src: new_list_path %>
+    </div>
+  </div>
+<%end%>

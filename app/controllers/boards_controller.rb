@@ -9,6 +9,12 @@ class BoardsController < ApplicationController
 
   # GET /boards/1 or /boards/1.json
   def show
+    @lists = @board.lists
+    current_board = @board
+
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   # GET /boards/new

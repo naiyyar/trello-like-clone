@@ -8,6 +8,12 @@ class TasksController < ApplicationController
 
   # GET /tasks/1 or /tasks/1.json
   def show
+    @list = List.find params[:list_id]
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   def sort
@@ -48,6 +54,11 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
+        format.turbo_stream do
+          turbo_stream.replace "edit_task_#{@task.id}" do
+            render partial: "tasks/task", locals: { task: @task, list: @task.list }
+          end
+        end
         format.html { redirect_to @task, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
