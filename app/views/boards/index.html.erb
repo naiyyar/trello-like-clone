@@ -1,21 +1,37 @@
-<% if @boards.exists? %>
+<%# if @boards.exists? %>
   <div class="flex">
     <div class="bg-gray-200 border-r-2 border-gray-300 top-0 left-0 bottom-0 fixed w-60">
       <div class="flex border-b-1 border-gray-400 py-2">
         <div class="px-3 w-15 rounded-sm"><%= image_tag "https://ui-avatars.com/api/?name=#{current_user.name}" %></div>
         <div class="my-1"><%= current_user.name %> </div>
       </div>
+      
+      <div class="my-5 px-3">
+        <div data-controller="modal" class="z">
+           <%= link_to 'New Board','#', class: 'rounded p-2 bg-sky-400 hover:bg-sky-600 text-white', "data-action"=>"click->modal#open" %>
 
-      <ul class="my-10">
-        <% @boards.each do |board| %>
-         <%= link_to board_path(board), data: { turbo_stream: true } do %>
-            <li class="py-1 px-3 my-2 hover:bg-gray-300"><%= board.name %></li>
-          <%end%>
-        <%end%>
+          <!-- Modal Background -->
+          <div data-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50" data-action="click->modal#close">
+            <!-- Modal Content -->
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+              <h2 class="text-xl font-semibold">Modal Title</h2>
+              <p class="mt-2">This is a Turbo-friendly Tailwind modal using Stimulus.js.</p>
+              
+              <!-- Close Button -->
+              <button data-action-close class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <ul class="my-10 px-3" id="boards-container">
+        <%= render 'boards' %>
       </ul>
     </div>
     
     <%# all lists %>
-    <%= render 'board_lists' %>
+    <div id="lists-container">
+      <%= render 'board_lists' %>
+    </div>
   </div>
-<%end%>
+<%#end%>

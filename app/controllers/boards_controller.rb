@@ -3,14 +3,15 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = Board.includes(:lists).rank(:row_order)
+    @boards = current_user.boards.includes(:lists).rank(:row_order)
     @lists = current_board.lists.includes(:tasks).rank(:row_order)
   end
 
   # GET /boards/1 or /boards/1.json
   def show
     @lists = @board.lists
-    current_board = @board
+    @boards = current_user.boards.includes(:lists).rank(:row_order)
+    switch_board(@board)
 
     respond_to do |format|
       format.turbo_stream

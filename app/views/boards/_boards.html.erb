@@ -1,0 +1,5 @@
+<% @boards.each do |board| %>
+  <%= link_to board_path(board), data: { turbo_stream: true } do %>
+    <li class="my-2 p-1 hover:bg-gray-300 hover:border-l-4 hover:border-sky-500 <%= current_board == board ? 'bg-gray-300 border-l-4 border-sky-500' : ''%>"><%= board.name %></li>
+  <%end%>
+<%end%>
