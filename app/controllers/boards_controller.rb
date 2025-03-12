@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
   # GET /boards or /boards.json
   def index
     @boards = current_user.boards.includes(:lists).rank(:row_order)
-    @lists = current_board.lists.includes(:tasks).rank(:row_order)
+    @lists = current_board.lists.includes(:tasks).rank(:row_order) if current_board
   end
 
   # GET /boards/1 or /boards/1.json
@@ -30,12 +30,16 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
+    @board.user = current_user
 
     respond_to do |format|
       if @board.save
+        switch_board(@board)
+        format.turbo_stream
         format.html { redirect_to @board, notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
+        format.turbo_stream
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end

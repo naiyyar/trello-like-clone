@@ -1,32 +1,18 @@
-<%= form_with(model: board) do |form| %>
-  <% if board.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
+<!-- Modal Background -->
+<div data-modal-target="modal" class="absolute inset-0 top-10 hidden" data-action="click->modal#close">
+  <div class="bg-white p-5 ml-3 rounded-lg shadow-lg max-w-60">
+    <!-- Form with Rails `form_tag` -->
+    <%= form_with(model: board, html: { data: { action: 'click->modal#submit', 'modal-target' => 'form' } }) do |f| %>
+      <div class="mb-4">
+        <%= f.label :name, 'Name' %>
+        <%= f.text_field :name, class: 'w-full p-2 border rounded', required: true, data: { 'modal-target' => 'nameInput' } %>
+        <p id="error-message"></p>
+      </div>
 
-      <ul>
-        <% board.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+      <div class="flex justify-end">
+        <%= f.submit 'Save', class: "bg-sky-500 text-white px-2 py-1 rounded", data: { turbo_disable: true } %>
+        <button type="button" data-action-close class="ml-2 bg-gray-400 text-white px-2 py-1 rounded">Close</button>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :background, style: "display: block" %>
-    <%= form.text_field :background %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
