@@ -16,15 +16,16 @@ export default class extends Controller {
 
   onEnd(ev){
     this.updateSorting(ev)
+    // ev.item.classList.remove('rotate-10')
   }
 
-  onStart(){
+  onStart(ev){
     this.handleCursor('grab')
+    // ev.item.classList.add('rotate-10')
   }
 
   updateSorting(ev){
     const sortableUrl = ev.item.dataset.sortableUrl
-    console.log(sortableUrl)
     put(sortableUrl, {
       body: JSON.stringify({row_order_position: ev.newIndex})
     })

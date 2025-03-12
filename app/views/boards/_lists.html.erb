@@ -1,0 +1,8 @@
+<div class="flex px-2" data-controller="sortable" data-sortable-group-value="lists">
+  <%= render @lists if @lists %>
+  <% if current_board  %>
+    <%= turbo_frame_tag "new_list", src: new_list_path %>
+  <%else%>
+    <h3 class="p-2 bg-orange-400 rounded text-black">No board found! Click on New Board button to create one.</h3>
+  <%end%>
+</div>

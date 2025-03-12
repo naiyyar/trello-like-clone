@@ -1,12 +1,10 @@
-<% content_for :title, "Editing task" %>
-
-<h1>Editing task</h1>
-
-<%= render "form", task: @task %>
-
-<br>
-
-<div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
-</div>
+<%= turbo_frame_tag "edit_task_#{@task.id}" do %>
+   <%= form_with(model: @task, url: [@task.list, @task]) do |form| %>
+      <%= form.text_area :title, class: 'rounded rounded-xl p-2 my-2 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-gray-400 cursor-pointer max-w-60', "data-task-target" => 'textarea' %>
+      
+      <div class="form-actions absolute1 right-0 left-0 bottom-" data-form-actions-target="actions">
+        <%= form.submit 'Add', class: 'rounded-full bg-sky-500 px-2 py-1 text-sm leading-5 font-semibold text-white hover:bg-sky-700 cursor-pointer' %>
+        <%= link_to 'X', '#', class: 'rounded-full bg-gray-500 px-3 py-1 text-sm leading-5 font-semibold text-white hover:bg-gray-700 cursor-pointer' %>
+      </div>
+    <% end %>
+<%end%>

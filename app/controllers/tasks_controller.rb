@@ -8,6 +8,12 @@ class TasksController < ApplicationController
 
   # GET /tasks/1 or /tasks/1.json
   def show
+    @list = List.find params[:list_id]
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   def sort
@@ -20,6 +26,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @list = List.find params[:list_id]
   end
 
   # GET /tasks/1/edit
@@ -29,9 +36,11 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.list_id = params[:list_id]
     respond_to do |format|
-      if @task.save
+      if @task.save!
+        @list = @task.list
+        format.turbo_stream
         format.html { redirect_to @task, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
@@ -45,6 +54,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
+        format.turbo_stream
         format.html { redirect_to @task, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else

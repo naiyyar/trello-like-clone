@@ -1,46 +1,33 @@
-<% if @boards.exists? %>
-  <div class="flex">
-    <div class="bg-gray-200 border-r-2 border-gray-300 top-0 left-0 bottom-0 fixed w-60">
-      <div class="flex border-b-1 border-gray-400 py-2">
-        <div class="px-3 w-15 rounded-sm"><%= image_tag "https://ui-avatars.com/api/?name=#{current_user.name}" %></div>
-        <div class="my-1"><%= current_user.name %> </div>
-      </div>
-
-      <ul class="my-10">
-        <% @boards.each do |board| %>
-          <%= link_to '#' do %>
-            <li class="py-1 px-3 my-2 hover:bg-gray-300">
-              <%= board.name %>  
-            </li>
-          <%end%>
-        <%end%>
-      </ul>
+<div class="flex h-screen">
+  <div class="bg-gray-200 border-r-2 border-gray-300 top-0 left-0 bottom-0 w-60 h-full">
+    <div class="flex border-b-1 border-gray-400 py-2">
+      <div class="px-3 w-15 rounded-sm"><%= image_tag "https://ui-avatars.com/api/?name=#{current_user.name}" %></div>
+      <div class="my-1"><%= current_user.name %> </div>
     </div>
     
-    <%# all lists %>
-    <div class="top-0 left-60 bottom-0 fixed p-5 right-0">
-      <div class="flex" data-controller="sortable" data-sortable-group-value="lists">
-        <% @lists.each do |list| %>
-          <div class="border border-gray-300 py-1 p-2 rounded rounded-xl m-1 shadow-md shadow-gray-150 min-w-80 bg-gray-100 cursor-pointer" data-sortable-url="<%=sort_list_path(list)%>">
-            <b class="text-gray-600"><%= list.name %></b>
-            
-            <div class="py-5" data-controller="sortable" data-sortable-group-value="tasks">
-              <% list.tasks.rank(:row_order).each do |task| %>
-                <p 
-                  class="py-1 bg-white border rounded rounded-xl border-gray-300 p-2 my-2 shadow-md shadow-gray-150 hover:border-blue-400 cursor-pointer"
-                  data-sortable-url="<%= sort_list_task_url(list, task) %>"
-                  >
-                  <%= task.title %>    
-                </p>
-              <%end%>
-            </div>
-          </div>
+    <div class="my-5 px-3 relative" data-controller="modal">
+      <button
+        type="button"
+        data-action="click->modal#open"
+        class="rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 cursor-pointer"
+        >New Board</button>
 
-          <div>
-            <%#= render 'tasks/form', task: Task.new %>
-          </div>
-        <%end%>
-      </div>
+        <%= render 'form', board: Board.new %>
     </div>
+    
+    <ul class="my-10 px-3" id="boards-container">
+      <%= render 'boards' %>
+    </ul>
   </div>
-<%end%>
+  
+  <%# all lists %>
+  <div id="lists-container" class="z-[50]">
+    <%= render 'board_lists' %>
+  </div>
+</div>
+
+
+<%# <div data-controller="modal" class="z-[9999]"> %>
+  <%#= link_to 'New Board','javascript:;', class: 'rounded p-2 bg-sky-400 hover:bg-sky-600 text-white', "data-action"=>"click->modal#open" %>
+  <%#= render 'form', board: Board.new %>
+<%# </div> %>

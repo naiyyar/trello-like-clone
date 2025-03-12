@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "tasks_#{@task.list_id}" do %>
+  <%= render partial: "task", locals: { task: @task, list: @list } %>
+<%end%>

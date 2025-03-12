@@ -27,7 +27,6 @@ A **Trello-like task management application** built with **Ruby on Rails 8**, **
 ### **2️⃣ Install Dependencies**
 
 `bundle install`
-`yarn install # If using Tailwind via webpack` 
 
 ### **3️⃣ Setup Database**
 
@@ -35,6 +34,6 @@ A **Trello-like task management application** built with **Ruby on Rails 8**, **
 
 ### **4️⃣ Start the Server**
 
-`rails server` 
+`./bin/dev` 
 
 Visit **http://localhost:3000/** in your browser. 🎉

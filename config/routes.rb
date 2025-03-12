@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :lists
   end
 
+  resources :tasks, only: [:edit, :show]
   resources :lists do
     put :sort, on: :member
     resources :tasks do

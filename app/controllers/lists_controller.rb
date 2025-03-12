@@ -29,9 +29,15 @@ class ListsController < ApplicationController
   # POST /lists or /lists.json
   def create
     @list = List.new(list_params)
+    @list.board = current_board
 
     respond_to do |format|
       if @list.save
+        format.turbo_stream do
+          turbo_stream.append "lists" do
+            render partial: 'lists/list', locals: { list: @list }
+          end
+        end
         format.html { redirect_to @list, notice: "List was successfully created." }
         format.json { render :show, status: :created, location: @list }
       else

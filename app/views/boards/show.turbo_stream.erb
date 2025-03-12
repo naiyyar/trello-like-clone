@@ -1,0 +1,7 @@
+<%= turbo_stream.update "lists-container" do %>
+  <%= render partial: "board_lists" %>
+<%end%>
+
+<%= turbo_stream.update "boards-container" do %>
+  <%= render partial: "boards" %>
+<%end%>
