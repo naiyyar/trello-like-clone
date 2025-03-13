@@ -30,10 +30,11 @@ export default class extends Controller {
           "Accept": "text/vnd.turbo-stream.html"
         }
       }).then(resp => {
+        window.data = resp
         if(!resp.response.ok){
-          throw new Error(`HTTP error! Status: ${resp.status}`);
+          throw new Error(`HTTP error! Status: ${resp.statusCode}`);
         }
-        debugger
+
         return resp.text
       }).then(html => {
         form.reset();

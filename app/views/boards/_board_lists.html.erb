@@ -1,6 +1,8 @@
 <%= turbo_frame_tag "lists_#{current_board.try(:id)}" do %>
   <div class="top-0 left-60 bottom-0 fixed right-0 overflow-x-auto" id="right-section">
-    <h3 class="w-full p-3 mb-2 bg-gray-200 text-black font-semibold"><%=current_board.name%></h3>
-    <%= render 'boards/lists' %>
+    <h3 class="w-full p-3 mb-2 bg-gray-200 text-black font-semibold">
+      <%=current_board.name%>    
+    </h3>
+    <%= render 'boards/lists', lists: @lists %>
   </div>
 <%end%>
