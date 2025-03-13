@@ -33,11 +33,8 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.turbo_stream do
-          turbo_stream.append "lists" do
-            render partial: 'lists/list', locals: { list: @list }
-          end
-        end
+        @lists = current_board.lists.includes(:tasks).rank(:row_order) if current_board
+        format.turbo_stream
         format.html { redirect_to @list, notice: "List was successfully created." }
         format.json { render :show, status: :created, location: @list }
       else
