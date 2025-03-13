@@ -40,7 +40,9 @@ class BoardsController < ApplicationController
         format.html { redirect_to @board, notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
-        format.turbo_stream
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.update('error-message', partial: 'boards/error'), status: :unprocessable_entity 
+        }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end

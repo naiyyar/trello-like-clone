@@ -1,7 +1,7 @@
 <%if @board.errors.any? %>
-  <%= turbo_stream.update 'error-message' do %>
-    <span class="text-red-500"><%= @board.errors.messages[:name].join(',') %></span>
-  <%end%>
+  <%#= turbo_stream.update 'error-message' do %>
+    <%# <span class="text-red-500"><%#= @board.errors.messages[:name].join(',') %></span> %>
+  <%#end%>
 <%else%>
   <%= turbo_stream.update 'boards-container' do %>
     <%= render partial: 'boards' %>
