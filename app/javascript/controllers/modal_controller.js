@@ -33,7 +33,6 @@ export default class extends Controller {
         if(!resp.response.ok){
           throw new Error(`HTTP error! Status: ${resp.status}`);
         }
-        debugger
         return resp.text
       }).then(html => {
         form.reset();

@@ -35,6 +35,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         switch_board(@board)
+        @boards = current_user.boards.includes(:lists).rank(:row_order) 
         format.turbo_stream
         format.html { redirect_to @board, notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
