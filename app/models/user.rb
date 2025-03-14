@@ -5,8 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :boards, dependent: :destroy
+  has_many :board_invitations, dependent: :destroy
+  has_many :invited_boards, through: :board_invitations, source: :board
 
   def name
     email.split('@')[0]
+  end
+
+  def accepted_boards
+    invited_boards.accepted
   end
 end

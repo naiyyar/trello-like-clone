@@ -25,6 +25,10 @@
   <body>
     <%# = render 'layouts/header_nav' %>
     <main class="container w-screen max-w-full">
+      <div id="alert" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md flex items-center space-x-2 transition-opacity duration-300 opacity-0 z-[999]">
+        <%#= render 'layouts/alert', message: 'Invitation Successfulyy sent' %>
+      </div>
+
       <%= yield %>
     </main>
     <%#= render 'layouts/footer_nav' %>

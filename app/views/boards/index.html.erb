@@ -17,8 +17,15 @@
     </div>
     
     <ul class="my-10 px-3" id="boards-container">
-      <%= render 'boards' %>
+      <b>Your Boards</b>
+      <%= render 'boards', boards: @boards %>
     </ul>
+    <% if @invited_boards.present? %>
+      <ul class="my-10 px-3" id="boards-container">
+        <b>Invited Boards</b>
+        <%= render 'boards', boards: @invited_boards %>
+      </ul>
+    <%end%>
   </div>
   
   <%# all lists %>

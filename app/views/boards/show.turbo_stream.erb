@@ -3,5 +3,5 @@
 <%end%>
 
 <%= turbo_stream.update "boards-container" do %>
-  <%= render partial: "boards" %>
+  <%= render "boards", boards: @boards %>
 <%end%>

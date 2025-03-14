@@ -3,16 +3,21 @@ import { post, put } from "@rails/request.js"
 
 // Connects to data-controller="modal"
 export default class extends Controller {
-  static targets = ["modal", 'nameInput', 'form'];
+  static targets = ["modal", 'nameInput', 'form', 'invitationModal', 'emailInput'];
 
-  open() {
-    this.modalTarget.classList.remove("hidden");
+  open(e) {
+    if(e.target.dataset.buttonType == 'invitation'){
+      this.modalTarget.classList.add("hidden");
+      this.invitationModalTarget.classList.remove("hidden");
+    }else{
+      this.invitationModalTarget.classList.add("hidden");
+      this.modalTarget.classList.remove("hidden");
+    }
   }
 
   submit(e){
     e.preventDefault()
     const form = this.formTarget
-    
     if(this.nameInputTarget.value != '' && e.target.type == 'submit') {
       if(form.dataset.method == 'put'){
         this.sendPut(form)
@@ -42,8 +47,10 @@ export default class extends Controller {
       }
       return resp.text
     }).then(html => {
+      debugger
       form.reset();
       this.hideForm()
+      document.getElementById('alert').classList.add('opacity-100')
     })
     .catch(error => console.error("Form submission error:", error));
   }
@@ -51,20 +58,30 @@ export default class extends Controller {
   requestOptions(form){
     return {
       method: form.method,
-      body: JSON.stringify({name: this.nameInputTarget.value }),
+      body: JSON.stringify(this.requestBody()),
       headers: {
         "Accept": "text/vnd.turbo-stream.html"
       }
     }
   }
 
+  requestBody(){
+    if(this.hasInvitationModalTarget){
+      return { email: this.emailInputTarget.value }
+    }else{
+      return { name: this.nameInputTarget.value }
+    }
+  }
+
   hideForm(){
     this.modalTarget.classList.add("hidden")
+    this.invitationModalTarget.classList.add("hidden");
   }
 
   close(event) {
     if (event.target === this.modalTarget || event.target.hasAttribute("data-action-close")) {
       this.modalTarget.classList.add("hidden");
+      this.invitationModalTarget.classList.add("hidden");
     }
   }
 }
