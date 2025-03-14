@@ -17,7 +17,13 @@
     </div>
     
     <ul class="my-10 px-3" id="boards-container">
-      <%= render 'boards' %>
+      <b>Your Boards</b>
+      <%= render 'boards', boards: @boards %>
+    </ul>
+
+    <ul class="my-10 px-3" id="boards-container">
+      <b>Collaboarations</b>
+      <%= render 'boards', boards: @invited_boards %>
     </ul>
   </div>
   
