@@ -3,7 +3,7 @@ import { post, put } from "@rails/request.js"
 
 // Connects to data-controller="modal"
 export default class extends Controller {
-  static targets = ["modal", 'nameInput', 'form', 'invitationModal'];
+  static targets = ["modal", 'nameInput', 'form', 'invitationModal', 'emailInput'];
 
   open(e) {
     if(e.target.dataset.buttonType == 'invitation'){
@@ -18,7 +18,6 @@ export default class extends Controller {
   submit(e){
     e.preventDefault()
     const form = this.formTarget
-    
     if(this.nameInputTarget.value != '' && e.target.type == 'submit') {
       if(form.dataset.method == 'put'){
         this.sendPut(form)
@@ -48,8 +47,10 @@ export default class extends Controller {
       }
       return resp.text
     }).then(html => {
+      debugger
       form.reset();
       this.hideForm()
+      document.getElementById('alert').classList.add('opacity-100')
     })
     .catch(error => console.error("Form submission error:", error));
   }
@@ -57,10 +58,18 @@ export default class extends Controller {
   requestOptions(form){
     return {
       method: form.method,
-      body: JSON.stringify({name: this.nameInputTarget.value }),
+      body: JSON.stringify(this.requestBody()),
       headers: {
         "Accept": "text/vnd.turbo-stream.html"
       }
+    }
+  }
+
+  requestBody(){
+    if(this.hasInvitationModalTarget){
+      return { email: this.emailInputTarget.value }
+    }else{
+      return { name: this.nameInputTarget.value }
     }
   }
 

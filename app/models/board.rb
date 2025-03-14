@@ -9,4 +9,8 @@ class Board < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id, message: 'Already taken, must be unique' }
+
+  scope :accepted, -> { where(board_invitations: { status: :accepted }) }
+  scope :pending, -> { where(board_invitations: { status: :pending }) }
+  scope :rejected, -> { where(board_invitations: { status: :rejected }) }
 end

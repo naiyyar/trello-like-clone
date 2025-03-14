@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
   # GET /boards or /boards.json
   def index
     @boards = current_user.boards.includes(:lists).rank(:row_order)
-    @invited_boards = current_user.invited_boards
+    @invited_boards = current_user.accepted_boards
     @lists = current_board.lists.includes(:tasks).rank(:row_order) if current_board
   end
 

@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def name
     email.split('@')[0]
   end
+
+  def accepted_boards
+    invited_boards.accepted
+  end
 end
