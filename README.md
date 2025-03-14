@@ -37,3 +37,5 @@ A **Trello-like task management application** built with **Ruby on Rails 8**, **
 `./bin/dev` 
 
 Visit **http://localhost:3000/** in your browser. 🎉
+
+![Board UI](https://github.com/naiyyar/trello-like-clone/blob/main/app/assets/images/board_page.png)
