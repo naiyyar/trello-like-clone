@@ -1,0 +1,9 @@
+<%= turbo_stream.update 'boards-container' do %>
+  <%= render partial: 'boards' %>
+<%end%>
+
+<%= turbo_stream.update 'board-name' do %>
+  <h3 class="text-black font-semibold" id="board-name"><%=@board.name%></h3>
+<%end%>
+
+<%=

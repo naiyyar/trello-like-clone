@@ -53,9 +53,14 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
+        @boards = current_user.boards.includes(:lists).rank(:row_order) 
+        format.turbo_stream
         format.html { redirect_to @board, notice: "Board was successfully updated." }
         format.json { render :show, status: :ok, location: @board }
       else
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.update('error-message', partial: 'boards/error'), status: :unprocessable_entity 
+        }
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end

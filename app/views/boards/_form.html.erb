@@ -1,5 +1,5 @@
 <!-- Modal Background -->
-<div data-modal-target="modal" class="absolute inset-0 top-10 hidden" data-action="click->modal#close">
+<div data-modal-target="modal" class="absolute inset-0 top-10 hidden z-[999]" data-action="click->modal#close">
   <div class="bg-white p-5 ml-3 rounded-lg shadow-lg max-w-60">
     <!-- Form with Rails `form_tag` -->
     <%= form_with(model: board, html: { data: { action: 'click->modal#submit', 'modal-target' => 'form' } }) do |f| %>
@@ -10,8 +10,8 @@
       </div>
 
       <div class="flex justify-end">
-        <%= f.submit 'Save', class: "bg-sky-500 text-white px-2 py-1 rounded", data: { turbo_disable: true } %>
-        <button type="button" data-action-close class="ml-2 bg-gray-400 text-white px-2 py-1 rounded">Close</button>
+        <%= f.submit 'Save', class: "bg-sky-500 text-white px-2 py-1 rounded cursor-pointer", data: { turbo_disable: true } %>
+        <button type="button" data-action-close class="ml-2 bg-gray-400 text-white px-2 py-1 rounded cursor-pointer">Close</button>
       </div>
     <% end %>
   </div>
