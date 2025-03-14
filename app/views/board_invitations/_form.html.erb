@@ -1,0 +1,12 @@
+<!-- Modal Background -->
+<div data-modal-target="invitationModal" class="absolute inset-0 top-10 hidden z-[999]" data-action="click->modal#close">
+  <div class="bg-white p-5 ml-3 rounded-lg shadow-lg max-w-100">
+     <%= form_with model: BoardInvitation.new, url: board_board_invitations_path(current_board), method: :post, remote: true do |f| %>
+        <%= f.email_field :email, placeholder: "Enter email", class: "border p-2 rounded mb-4 w-full" %>        
+        <div class="flex justify-end">
+          <%= f.submit 'Send', class: "bg-sky-500 text-white px-2 py-1 rounded cursor-pointer", data: { turbo_disable: true } %>
+          <button type="button" data-action-close class="ml-2 bg-gray-400 text-white px-2 py-1 rounded cursor-pointer">Close</button>
+        </div>
+      <% end %>
+  </div>
+</div>
