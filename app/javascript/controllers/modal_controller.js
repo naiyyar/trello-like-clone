@@ -66,6 +66,7 @@ export default class extends Controller {
 
   hideForm(){
     this.modalTarget.classList.add("hidden")
+    this.invitationModalTarget.classList.add("hidden");
   }
 
   close(event) {

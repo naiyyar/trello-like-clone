@@ -6,6 +6,7 @@ class BoardInvitation < ApplicationRecord
 
   before_create :generate_token
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :status, inclusion: { in: statuses.keys }
 
   private
 

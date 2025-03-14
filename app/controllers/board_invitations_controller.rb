@@ -7,11 +7,15 @@ class BoardInvitationsController < ApplicationController
     invitation.user = current_user
     invitation.status = :pending
 
-    if invitation.save
-      BoardInvitationMailer.invite_email(invitation).deliver_later
-      redirect_to @board, notice: "Invitation sent successfully."
-    else
-      redirect_to @board, alert: "Failed to send invitation."
+    respond_to do |format|
+      if invitation.save
+        BoardInvitationMailer.invite_email(invitation).deliver_now
+        format.turbo_stream      
+      else
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.update('error-message', partial: 'boards/error'), status: :unprocessable_entity 
+        }
+      end
     end
   end
 
@@ -21,11 +25,12 @@ class BoardInvitationsController < ApplicationController
     if invitation&.pending?
       user = User.find_by(email: invitation.email)
       if user
-        invitation.board.users << user
-        invitation.accepted!  # Update status using enum method
-        redirect_to invitation.board, notice: "You have joined the board!"
+        invitation.update(user: user, status: :accepted)
+        flash[:notice] = "You have joined the board!"
+        redirect_to root_path
       else
-        redirect_to root_path, alert: "Invalid invitation."
+        flash[:alert] = "Invalid invitation."
+        redirect_to root_path
       end
     else
       redirect_to root_path, alert: "Invitation is no longer valid."
@@ -35,6 +40,6 @@ class BoardInvitationsController < ApplicationController
   private
 
   def invitation_params
-    params.require(:board_invitations).permit(:email)
+    params.expect(board_invitation: [ :email ])
   end
 end
