@@ -3,7 +3,7 @@
     <b class="text-gray-600 z-[50]"><%= list.name %></b>
   </div>
   
-  <div id="tasks_<%=list.id%>" class="py-4" data-controller="sortable" data-sortable-group-value="tasks">
+  <div id="tasks_<%=list.id%>" class="py-4" data-controller="sortable" data-sortable-group-value="shared" data-to-list-id=<%=list.id%>>
     <% list.tasks.rank(:row_order).each do |task| %>
       <%= render 'tasks/task', task: task, list: list %>
     <%end%>
