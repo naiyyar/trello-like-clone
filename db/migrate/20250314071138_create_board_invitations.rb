@@ -5,7 +5,7 @@ class CreateBoardInvitations < ActiveRecord::Migration[8.0]
       t.string :token
       t.references :board, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_14_071138) do
     t.string "token"
     t.bigint "board_id", null: false
     t.bigint "user_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_board_invitations_on_board_id"
