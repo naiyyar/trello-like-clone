@@ -1,0 +1,34 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign up</h2>
+      
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="mb-4">
+          <label class="block text-gray-700">Email</label>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", required: true %>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Password</label>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "Enter your password", required: true %>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Confirm Password</label>
+          <%= f.password_field :password_confirmation, autocomplete: "current-password", class: "w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "Enter your password", required: true %>
+        </div>
+
+        <%= f.submit "Sign up", class: "w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition cursor-pointer" %>
+      <%end%>
+
+      <p class="text-center text-gray-600 text-sm mt-4">
+        Have an account?
+        <%- if controller_name != 'sessions' %>
+          <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-500 hover:underline" %><br />
+        <% end %>
+      </p>
+  </div>
+</body>

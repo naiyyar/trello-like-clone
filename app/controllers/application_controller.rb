@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   before_action :authenticate_user!
-  before_action :set_current_board
+  before_action :set_current_board, if: :user_signed_in?
 
   helper_method :current_board
 
