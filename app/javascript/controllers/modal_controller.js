@@ -3,10 +3,16 @@ import { post, put } from "@rails/request.js"
 
 // Connects to data-controller="modal"
 export default class extends Controller {
-  static targets = ["modal", 'nameInput', 'form'];
+  static targets = ["modal", 'nameInput', 'form', 'invitationModal'];
 
-  open() {
-    this.modalTarget.classList.remove("hidden");
+  open(e) {
+    if(e.target.dataset.buttonType == 'invitation'){
+      this.modalTarget.classList.add("hidden");
+      this.invitationModalTarget.classList.remove("hidden");
+    }else{
+      this.invitationModalTarget.classList.add("hidden");
+      this.modalTarget.classList.remove("hidden");
+    }
   }
 
   submit(e){
@@ -65,6 +71,7 @@ export default class extends Controller {
   close(event) {
     if (event.target === this.modalTarget || event.target.hasAttribute("data-action-close")) {
       this.modalTarget.classList.add("hidden");
+      this.invitationModalTarget.classList.add("hidden");
     }
   }
 }
