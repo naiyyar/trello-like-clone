@@ -26,8 +26,9 @@ export default class extends Controller {
 
   updateSorting(ev){
     const sortableUrl = ev.item.dataset.sortableUrl
+    const target_list_id = ev.to.dataset.toListId
     put(sortableUrl, {
-      body: JSON.stringify({row_order_position: ev.newIndex})
+      body: JSON.stringify({row_order_position: ev.newIndex, target_list_id: target_list_id})
     })
   }
 

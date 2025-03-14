@@ -18,7 +18,9 @@ class TasksController < ApplicationController
 
   def sort
     task = Task.find(params[:id])
-    task.update(row_order_position: params[:row_order_position])
+    task.row_order_position = params[:row_order_position]
+    task.list_id = params[:target_list_id] if params[:target_list_id].present?
+    task.save
 
     head :no_content
   end
