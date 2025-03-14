@@ -2,7 +2,8 @@
 <div data-modal-target="modal" class="absolute inset-0 top-10 hidden z-[999]" data-action="click->modal#close">
   <div class="bg-white p-5 ml-3 rounded-lg shadow-lg max-w-60">
     <!-- Form with Rails `form_tag` -->
-    <%= form_with(model: board, html: { data: { action: 'click->modal#submit', 'modal-target' => 'form' } }) do |f| %>
+    <%= form_with(model: board, 
+                  html: { data: { action: 'click->modal#submit', 'modal-target' => 'form', method: board.new_record? ? 'post' : 'put' } }) do |f| %>
       <div class="mb-4">
         <%= f.label :name, 'Name' %>
         <%= f.text_field :name, class: 'w-full p-2 border rounded', required: true, data: { 'modal-target' => 'nameInput' } %>

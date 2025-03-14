@@ -12,26 +12,54 @@ export default class extends Controller {
   submit(e){
     e.preventDefault()
     const form = this.formTarget
-    window.data = e
+    
     if(this.nameInputTarget.value != '' && e.target.type == 'submit') {
-      put(form.action, {
-        method: form.method,
-        body: JSON.stringify({name: this.nameInputTarget.value }),
-        headers: {
-          "Accept": "text/vnd.turbo-stream.html"
-        }
-      }).then(resp => {
-        if(!resp.response.ok){
-          throw new Error(`HTTP error! Status: ${resp.statusCode}`);
-        }
-
-        return resp.text
-      }).then(html => {
-        form.reset();
-        this.modalTarget.classList.add("hidden")
-      })
-      .catch(error => console.error("Form submission error:", error));
+      if(form.dataset.method == 'put'){
+        this.sendPut(form)
+      } else {
+        this.sendPost(form)
+      }
     }
+  }
+
+  sendPut(form){
+    put(form.action, this.requestOptions(form)).then(resp => {
+      if(!resp.response.ok){
+        throw new Error(`HTTP error! Status: ${resp.statusCode}`);
+      }
+      return resp.text
+    }).then(html => {
+      form.reset();
+      this.hideForm()
+    })
+    .catch(error => console.error("Form submission error:", error));
+  }
+
+  sendPost(form){
+    post(form.action, this.requestOptions(form)).then(resp => {
+      if(!resp.response.ok){
+        throw new Error(`HTTP error! Status: ${resp.statusCode}`);
+      }
+      return resp.text
+    }).then(html => {
+      form.reset();
+      this.hideForm()
+    })
+    .catch(error => console.error("Form submission error:", error));
+  }
+
+  requestOptions(form){
+    return {
+      method: form.method,
+      body: JSON.stringify({name: this.nameInputTarget.value }),
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html"
+      }
+    }
+  }
+
+  hideForm(){
+    this.modalTarget.classList.add("hidden")
   }
 
   close(event) {
