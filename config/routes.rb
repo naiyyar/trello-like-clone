@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :boards do
     resources :lists
+    resources :board_invitations
   end
 
   resources :tasks, only: [:edit, :show]
