@@ -1,0 +1,14 @@
+class BoardInvitation < ApplicationRecord
+  enum status: { pending: 0, accepted: 1, declined: 2 }
+  belongs_to :board
+  belongs_to :user
+
+  before_create :generate_token
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  private
+
+  def generate_token
+    self.token = SecureRandom.hex(8)
+  end
+end
