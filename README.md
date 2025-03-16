@@ -21,7 +21,7 @@ A **Trello-like task management application** built with **Ruby on Rails 8**, **
 
 ### **1️⃣ Clone the Repository**
 
-`git clone https://github.com/yourusername/trello_clone.git`
+`git clone https://github.com/naiyyar/trello-like-clone.git`
 `cd trello_clone` 
 
 ### **2️⃣ Install Dependencies**
