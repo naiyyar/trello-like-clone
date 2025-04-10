@@ -71,3 +71,5 @@ gem "ranked-model", "~> 0.4.11"
 gem "requestjs-rails", "~> 0.0.12"
 
 gem "letter_opener", "~> 1.10"
+
+gem "rack-cors", "~> 2.0"
