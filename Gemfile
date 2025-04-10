@@ -73,3 +73,6 @@ gem "requestjs-rails", "~> 0.0.12"
 gem "letter_opener", "~> 1.10"
 
 gem "rack-cors", "~> 2.0"
+
+gem "graphql", "~> 2.5"
+gem "graphiql-rails", group: :development
